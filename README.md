@@ -60,8 +60,9 @@ x = np.linspace(0,1,N) # normlized length
 # impedance profiles
 Zlin  = (Z2-Z1)*x + Z1    # linear
 Zexp  = Z1*(Z2/Z1)**x     # exponential
-Zatan = (Z2-Z1)*np.arctan(x/(1-x*0.999))*2/np.pi + Z1  # arctan  (the 0.999 is to avoid dividing by zero)
+Zatan = (Z2-Z1)*np.arctan(x/(1-x*0.999))*2/np.pi + Z1  # arctan (the 0.999 is to avoid dividing by zero)
 Ztanh = (Z2-Z1)*np.tanh(x/(1-x*0.999)) + Z1            # tanh
+Zsin2 = Z1+(Z2-Z1)*np.sin(np.pi/2*x)**2                # sine^2
 ```
 
 ![Zprofiles.png](images/Zprofiles.png)
@@ -72,6 +73,7 @@ Slin  = taperS(Zlin,  L, f, ereff=ereff)
 Sexp  = taperS(Zexp,  L, f, ereff=ereff)
 Satan = taperS(Zatan, L, f, ereff=ereff)
 Stanh = taperS(Ztanh, L, f, ereff=ereff)
+Ssin2 = taperS(Zsin2, L, f, ereff=ereff)
 ```
 
 ![Sresponses.png](images/Sresponses.png)
