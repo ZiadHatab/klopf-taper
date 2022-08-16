@@ -26,7 +26,7 @@ Zklopf = klopf(Z1, Z2, Gmax, N)  # Klopfenstein impedance profile
 
 ![Zklopf.png](images/Zklopf.png)
 
-Since the Klopfenstein taper is based Tchebycheff filter, the S-parameters can be computed using the theoretical response of a Tchebycheff filter (see [1]). However, a general method to get the S-parameters is with cascading finite segments across the length of the taper. This method can be used for any impedance profile (see the corresponding section below for examples).
+Since the Klopfenstein taper is based Tchebycheff filter, the S-parameters can be computed using the theoretical response of a Tchebycheff filter (see [1]). However, a general method to get the S-parameters is by cascading finite segments across the length of the taper. This method can be used for any impedance profile (see the section below for examples).
 
 ```python
 M = 400  # number of frequency points
