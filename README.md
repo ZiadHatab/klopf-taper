@@ -62,7 +62,7 @@ Zlin  = (Z2-Z1)*x + Z1    # linear
 Zexp  = Z1*(Z2/Z1)**x     # exponential
 Zatan = (Z2-Z1)*np.arctan(x/(1-x*0.999))*2/np.pi + Z1  # arctan (the 0.999 is to avoid dividing by zero)
 Ztanh = (Z2-Z1)*np.tanh(x/(1-x*0.999)) + Z1            # tanh
-Zsin2 = Z1+(Z2-Z1)*np.sin(np.pi/2*x)**2                # sine^2
+Zsin2 = Z1+(Z2-Z1)*np.sin(np.pi/2*x)**2                # sine^2 (try changing the period and see what happens)
 ```
 
 ![Zprofiles.png](images/Zprofiles.png)
