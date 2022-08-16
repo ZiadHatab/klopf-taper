@@ -53,7 +53,7 @@ f3db = klopf_L2f(Z1, Z2, Gmax, L, ereff)
 
 ## Comparison with other tapers
 
-It is always fun to experiment with other impedance profiles. Your typical textbook will probably only mention linear and exponential impedance profiles, but you can be creative and define your own impedance profiles. Just make sure you start with Z1 and end with Z2.
+It is always fun to experiment with other impedance profiles. Your typical textbook will probably only mention linear and exponential impedance profiles, but you can be creative and define your own impedance profiles. Just make sure you start with Z1 and end with Z2. On the other hand, you can be super creative and create impedance profiles that are not monotonically increasing (or decreasing). Try creating a profile oscillating between Z1 and Z2 and see what happens. Who knows you might discover filtering ;)
 
 ```python
 x = np.linspace(0,1,N) # normlized length
