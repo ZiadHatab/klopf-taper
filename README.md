@@ -1,6 +1,6 @@
 # Klopfenstein Taper
 
-Python implementation of the Klopfenstein taper based on [1]-[3]. A beginner-friendly explanation of Klopfenstein taper can be found in [4]. For now, I only provide you with the functions to obtain the impedance profile with respect to length. To actually map the impedance profile to a transmission line type, see the discussion in the last section below.
+Python implementation of the Klopfenstein taper based on [1]-[3]. A beginner-friendly explanation of the Klopfenstein taper can be found in [4]. For now, I only provide you with the functions to obtain the impedance profile with respect to length. To actually map the impedance profile to a transmission line type, see the discussion in the last section below.
 
 ## Code requirements
 
