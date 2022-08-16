@@ -216,6 +216,7 @@ if __name__ == '__main__':
     Zexp  = Z1*(Z2/Z1)**x     # exponential
     Zatan = (Z2-Z1)*np.arctan(x/(1-x*0.999))*2/np.pi + Z1  # arctan (the 0.999 is to avoid dividing by zero)
     Ztanh = (Z2-Z1)*np.tanh(x/(1-x*0.999)) + Z1            # tanh
+    Zsin2 = Z1+(Z2-Z1)*np.sin(np.pi/2*x)**2                # sine^2
     
     fig, ax = plt.subplots(1,1, figsize=(5.5, 5.5/1.5))
     ax.plot(x, Zklopf, '-' , lw=2, label='Klopfenstein')
@@ -223,6 +224,7 @@ if __name__ == '__main__':
     ax.plot(x, Zexp  , '-' , lw=2, label='Exponential')
     ax.plot(x, Zatan , '-' , lw=2, label='Arctan')
     ax.plot(x, Ztanh , '-' , lw=2, label='Tanh')
+    ax.plot(x, Zsin2 , '-' , lw=2, label='Sine2')
     ax.set_ylabel('Impedance profile (ohm)')
     ax.set_xlabel('Normalized length')
     fig.set_dpi(600)
@@ -230,10 +232,11 @@ if __name__ == '__main__':
     plt.legend()
     
     # frequency response
-    Slin  = taperS(Zlin, L, f, ereff=ereff)
-    Sexp  = taperS(Zexp, L, f, ereff=ereff)
+    Slin  = taperS(Zlin,  L, f, ereff=ereff)
+    Sexp  = taperS(Zexp,  L, f, ereff=ereff)
     Satan = taperS(Zatan, L, f, ereff=ereff)
     Stanh = taperS(Ztanh, L, f, ereff=ereff)
+    Ssin2 = taperS(Zsin2, L, f, ereff=ereff)
     
     fig, axs = plt.subplots(1,2, figsize=(5.5, 5.5/2))
     labels = ['S11', 'S21']
@@ -244,6 +247,7 @@ if __name__ == '__main__':
         ax.plot(f*1e-9, mag2db(Sexp[:,inx,0]) , '-', lw=2, label='Exponential')
         ax.plot(f*1e-9, mag2db(Satan[:,inx,0]), '-', lw=2, label='Arctan')
         ax.plot(f*1e-9, mag2db(Stanh[:,inx,0]), '-', lw=2, label='Tanh')
+        ax.plot(f*1e-9, mag2db(Ssin2[:,inx,0]), '-', lw=2, label='Sine2')
         ax.set_ylabel(labels[inx] + ' (dB)')
         ax.set_xlabel('Frequency (GHz)')
     fig.set_dpi(600)
