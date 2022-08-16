@@ -76,7 +76,7 @@ Stanh = taperS(Ztanh, L, f, ereff=ereff)
 
 ![Sresponses.png](images/Sresponses.png)
 
-## Remarks on Klopfenstein taper
+## Remarks on the Klopfenstein taper
 
 Whenever I read about Klopfenstein taper from other authors, I always get the feeling that Klopfenstein taper is the best taper you can design. However, that is not entirely true. The “optimality” of Klopfenstein taper comes from the optimality of the standard Tchebycheff filter, which is optimal in the sense of minimizing the maximum ripple in the passband for a desired maximum ripple. However, if you care more about the cut-off frequency, you can design other impedance profiles that give lower cut-off frequency for the same taper length. Of course, the ripple in the passband would be different, but that is up to your specification. In theory, if you follow the same procedure Klopfenstein took in deriving his taper, you can stop at the point where he decided to use Tchebycheff response, and put your own high-pass filter response. Though, you might not get a nice equation for the impedance profile.
 
