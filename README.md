@@ -1,6 +1,6 @@
 # Klopfenstein Taper
 
-Python implementation of the Klopfenstein taper based on [1]-[3]. A beginner-friendly explanation of the Klopfenstein taper can be found in [4]. For now, I only provide you with the functions to obtain the impedance profile with respect to length. To actually map the impedance profile to a transmission line type, see the discussion in the last section below.
+Python implementation of the Klopfenstein taper based on references [1]-[3]. A beginner-friendly explanation of the Klopfenstein taper can be found in [4]. Currently, this repository provides functions to calculate the impedance profile along the taper length. For mapping the impedance profile to specific transmission line geometries, please refer to the discussion in the last section below.
 
 ## Code requirements
 
@@ -78,40 +78,31 @@ Ssin2 = taperS(Zsin2, L, f, ereff=ereff)
 
 ![Sresponses.png](images/Sresponses.png)
 
-## Remarks on the Klopfenstein taper
+## Remarks on the Klopfenstein Taper
 
-Whenever I read about Klopfenstein taper from other authors, I always get the feeling that Klopfenstein taper is the best taper you can design. However, that is not entirely true. The “optimality” of Klopfenstein taper comes from the optimality of the standard Tchebycheff filter, which is optimal in the sense of minimizing the maximum ripple in the passband for a desired maximum ripple. However, if you care more about the cut-off frequency, you can design other impedance profiles that give lower cut-off frequency for the same taper length. Of course, the ripple in the passband would be different, but that is up to your specification. In theory, if you follow the same procedure Klopfenstein took in deriving his taper, you can stop at the point where he decided to use Tchebycheff response, and put your own high-pass filter response. Though, you might not get a nice equation for the impedance profile.
+While many authors present the Klopfenstein taper as the ultimate taper design, this requires some clarification. The taper's "optimality" derives from the standard Chebyshev filter, which minimizes the maximum ripple in the passband for a specified maximum ripple value. However, if your primary concern is the cut-off frequency, other impedance profiles can achieve lower cut-off frequencies for the same taper length, albeit with different passband ripple characteristics.
 
-Lastly, this is often forgotten, but the Klopfenstein taper is strictly defined for true TEM propagation. This means lossless and dispersion-free medium. Such conditions are never achieved in practice (unless you are working with superconductors). For typical transmission line types with relatively low losses, the Klopfenstein taper should be fine, but expect things to look differently if you try applying such taper in very lossy materials.
+Theoretically, you could follow Klopfenstein's derivation process but deviate at the point where he chose the Chebyshev response, substituting your own high-pass filter response instead. This might not yield such elegant equations for the impedance profile, but it could better suit your specific requirements.
+
+An important consideration often overlooked is that the Klopfenstein taper is strictly defined for true TEM propagation, which assumes both lossless and dispersion-free medium. These ideal conditions are practically unattainable except with superconductors. For typical transmission lines with moderate losses, the Klopfenstein taper performs adequately, but expect performance deviation when implementing such tapers in highly lossy materials.
 
 ## Map the impedance profile to geometric values
 
-This is the trickiest part of designing a taper for a transmission line. It is quite easy to define an impedance profile, which could be anything as discussed in the taper comparison example above. If your transmission line has only one geometric parameter to vary, then you could reverse calculate that value from the impedance profile. For example, the trace width of a microstrip line. You can find quasi-static models in [5]. You can also check [6] for equations for other transmission line types.
+This is the most challenging aspect of taper design for transmission lines. While defining an impedance profile is straightforward (as shown in the comparison examples above), mapping it to physical dimensions requires careful consideration.
 
-The problem get more complicated when you have to vary more than one geometric parameter. For example, in coplanar waveguide (CPW) you can vary the width of the signal line as well as the spacing to the ground planes. To be honest, I’m not aware of a simple solution. The best I can think of is to define one parameter yourself and compute the other from the impedance profile. If someone knows about a better solution, please let me know. I will update this repo if I have better idea on this topic.
+For transmission lines with a single variable parameter (like microstrip trace width), you can calculate the dimension directly from the impedance profile using quasi-static models found in [5]. Additional equations for various transmission line types are available in [6].
+
+The challenge increases significantly with multiple geometric parameters. For instance, coplanar waveguides (CPW) involve both signal line width and ground plane spacing. To be honest, I’m not aware of a simple solution. The best I can think of is to define one parameter yourself and compute the other from the impedance profile. If someone knows about a better solution, please let me know. I will update this repo if I have better idea on this topic.
 
 ## References
+[1] R. W. Klopfenstein, "A Transmission Line Taper of Improved Design," in Proceedings of the IRE, vol. 44, no. 1, pp. 31-35, Jan. 1956, [doi: 10.1109/JRPROC.1956.274847](https://doi.org/10.1109/JRPROC.1956.274847).
+    
+[2] D. Kajfez and J. O. Prewitt, "Correction to "A Transmission Line Taper of Improved Design" (Letters)," in IEEE Transactions on Microwave Theory and Techniques, vol. 21, no. 5, pp. 364-364, May 1973, [doi: 10.1109/TMTT.1973.1128003](https://doi.org/10.1109/TMTT.1973.1128003).
+    
+[3] M. A. Grossberg, "Extremely rapid computation of the Klopfenstein impedance taper," in Proceedings of the IEEE, vol. 56, no. 9, pp. 1629-1630, Sept. 1968, [doi: 10.1109/PROC.1968.6686](https://doi.org/10.1109/PROC.1968.6686).
+    
+[4] Michael Steer, Microwave and RF Design: Networks. Volume 3. (Third Edition), NC State University, 2019. [doi: 10.5149/9781469656953_Steer](https://doi.org/10.5149/9781469656953_Steer)
+    
+[5] Michael Steer, Microwave and RF Design: Transmission Lines. Volume 2. (Third Edition), NC State University, 2019. [doi: 10.5149/9781469656939_Steer](https://doi.org/10.5149/9781469656939_Steer)
 
-- [1] R. W. Klopfenstein, "A Transmission Line Taper of Improved Design," in Proceedings of the IRE, vol. 44, no. 1, pp. 31-35, Jan. 1956, doi: 10.1109/JRPROC.1956.274847.
-    
-    [A Transmission Line Taper of Improved Design](https://ieeexplore.ieee.org/document/4051841)
-    
-- [2] D. Kajfez and J. O. Prewitt, "Correction to "A Transmission Line Taper of Improved Design" (Letters)," in IEEE Transactions on Microwave Theory and Techniques, vol. 21, no. 5, pp. 364-364, May 1973, doi: 10.1109/TMTT.1973.1128003.
-    
-    [Correction to "A Transmission Line Taper of Improved Design" (Letters)](https://ieeexplore.ieee.org/document/1128003)
-    
-- [3] M. A. Grossberg, "Extremely rapid computation of the Klopfenstein impedance taper," in Proceedings of the IEEE, vol. 56, no. 9, pp. 1629-1630, Sept. 1968, doi: 10.1109/PROC.1968.6686.
-    
-    [Extremely rapid computation of the Klopfenstein impedance taper](https://ieeexplore.ieee.org/document/1448616)
-    
-- [4] Michael Steer, Microwave and RF Design: Networks. Volume 3. (Third Edition), NC State University, 2019. doi: 10.5149/9781469656953_Steer
-    
-    [Microwave and RF Design: Networks](https://doi.org/10.5149/9781469656953_Steer)
-    
-- [5] Michael Steer, Microwave and RF Design: Transmission Lines. Volume 2. (Third Edition), NC State University, 2019. doi: 10.5149/9781469656939_Steer
-    
-    [Microwave and RF Design: Transmission Lines](https://doi.org/10.5149/9781469656939_Steer)
-    
-- [6] B. Wadell, Transmission Line Design Handbook, ser. Artech House Microwave Library. Artech House, 1991. ISBN: 9780890064368
-    
-    [Transmission Line Design Handbook](https://uk.artechhouse.com/Transmission-Line-Design-Handbook-P684.aspx)
+[6] B. Wadell, Transmission Line Design Handbook, ser. Artech House Microwave Library. Artech House, 1991. ISBN: 9780890064368
